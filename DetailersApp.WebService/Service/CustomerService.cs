@@ -29,7 +29,7 @@ namespace DetailersApp.WebService.Service
 
                 using (var conn = _connection)
                 {
-                    var ret = await conn.QueryAsync<T>($"Select * From DetailersApp.dbo.{ GetDbName(typeof(T)) }");
+                    var ret = await conn.QueryAsync<T>($"Select * From DetailersApp.dbo.{ GetTableName() }");
                     return (ret, null);
                 }
             }
@@ -48,7 +48,7 @@ namespace DetailersApp.WebService.Service
 
                 using (var conn = _connection)
                 {
-                    var ret = await conn.QueryAsync<T>($"Select * From DetailersApp.dbo.{ GetDbName(typeof(T)) } where Id = @Id",
+                    var ret = await conn.QueryAsync<T>($"Select * From DetailersApp.dbo.{ GetTableName() } where Id = @Id",
                             new { @Id = id }
                         )
                         ;
@@ -62,7 +62,7 @@ namespace DetailersApp.WebService.Service
             }
         }
 
-        private string GetDbName(object model)
+        private string GetTableName()
         {
             return typeof(T).Name;
         }

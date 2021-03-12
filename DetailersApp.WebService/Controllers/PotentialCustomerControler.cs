@@ -44,10 +44,10 @@ namespace DetailersApp.WebService.Controllers
             (PotentialCustomer result, string error) = await _custSvc.GetById(id);
 
             if (!string.IsNullOrEmpty(error) && error.Contains("Exception", StringComparison.OrdinalIgnoreCase))
-                return StatusCode(500, $"There was an Exception in the proces. \n{ error}");
+                return StatusCode(500, $"There was an Exception in the proces. \n{ error }");
 
             if (!string.IsNullOrEmpty(error) && !error.Contains("Exception", StringComparison.OrdinalIgnoreCase))
-                return StatusCode(500, $"{ error}");
+                return StatusCode(500, $"{ error }");
 
             return Ok(result);
         }
