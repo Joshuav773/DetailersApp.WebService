@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using DetailersApp.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace DetailersApp.WebService.Bootstrap
         protected override void RegisterAdditionalDependencies(ContainerBuilder builder)
         {
             //this is your continer wrapper, register all dependencies
+            builder.RegisterType<DetailersAppContext>()
+                .AsSelf()
+                ;
         }
     }
 }

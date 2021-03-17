@@ -1,4 +1,5 @@
-﻿using DetailersApp.WebService.Model;
+﻿using DetailersApp.Repository.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace DetailersApp.WebService.Service
 {
-    public class PotentialCustomerService : CustomerService<PotentialCustomer>
+    public class PotentialCustomerService 
     {
-        public override async Task<(IEnumerable<PotentialCustomer>, string)> GetAll()
+        private DetailersAppContext _context;
+
+        public PotentialCustomerService(DetailersAppContext context)
         {
-            return await base.GetAll();
+            this._context = context;
         }
 
-        public override async Task<(PotentialCustomer, string)> GetById(int id)
+        public async Task<IEnumerable<PotentialCustomer>> GetAllPotentialCustomers() 
         {
-            return await base.GetById(id);
+            using (var ctx = _context)
+            {
+                return await ctx.PotentialCustomers.ToListAsync();
+            }
         }
     }
 }
