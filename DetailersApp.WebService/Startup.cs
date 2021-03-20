@@ -32,8 +32,8 @@ namespace DetailersApp.WebService
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Utune API",
-                    Description = "WebService For Utune",
+                    Title = "Broward Detilers API",
+                    Description = "WebService For Broward Detilers",
                     Contact = new OpenApiContact
                     {
                         Name = "Joshua Vargas",
