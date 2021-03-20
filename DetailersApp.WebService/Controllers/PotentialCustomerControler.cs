@@ -30,10 +30,10 @@ namespace DetailersApp.WebService.Controllers
             var customers = await _custSvc.GetAllPotentialCustomers();
             if (!customers.Any())
             {
-                return StatusCode(404, new PotentialCustomerResponse
+                return StatusCode(404, new PotentialCustomerResponse()
                 {
                     IsSuccess = false,
-                    PotentialCustomers = customers,
+                    Results = customers,
                     Errors = new string[] { "No Potential Customers Found" }
                 });
             }
@@ -41,7 +41,7 @@ namespace DetailersApp.WebService.Controllers
             var ret = new PotentialCustomerResponse
             {
                 IsSuccess = true,
-                PotentialCustomers = customers,
+                Results = customers,
                 Errors = new string[] { }
             };
 

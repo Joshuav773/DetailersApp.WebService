@@ -8,14 +8,12 @@ namespace DetailersApp.WebService.Envelope
 {
     public class PotentialCustomerEnvelope 
     {
-        public class PotentialCustomerResponse : BaseEnvelope
+        public class PotentialCustomerResponse : BaseResponse<PotentialCustomer>
         {
-            public IEnumerable<PotentialCustomer> PotentialCustomers { get; set; }
         }
 
         public class PotentialCustomerRequest : PotentialCustomer
         {
-
         }
     }
 }
