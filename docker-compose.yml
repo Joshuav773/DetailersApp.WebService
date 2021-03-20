@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  detailersapp.webservice:
+    image: ${DOCKER_REGISTRY-}detailersappwebservice
+    build:
+      context: .
+      dockerfile: DetailersApp.WebService/Dockerfile

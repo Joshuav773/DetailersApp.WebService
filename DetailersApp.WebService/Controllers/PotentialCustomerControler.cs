@@ -25,12 +25,13 @@ namespace DetailersApp.WebService.Controllers
         // GET api/values
         [HttpGet("all")]
         [ProducesResponseType(typeof(PotentialCustomerResponse), 200)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
         public async Task<IActionResult> GetAll()
         {
             var customers = await _custSvc.GetAllPotentialCustomers();
             if (!customers.Any())
             {
-                return StatusCode(404, new PotentialCustomerResponse()
+                return NotFound(new PotentialCustomerResponse()
                 {
                     IsSuccess = false,
                     Results = customers,

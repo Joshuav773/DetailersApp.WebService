@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Autofac;
+using Microsoft.OpenApi.Models;
 
 namespace DetailersApp.WebService
 {
@@ -25,6 +26,21 @@ namespace DetailersApp.WebService
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddMvcOptions(options => options.EnableEndpointRouting = false);
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Utune API",
+                    Description = "WebService For Utune",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Joshua Vargas",
+                        Email = string.Empty,
+                    },
+                });
+            });
 
             var container = new ContainerBuilder();
 
@@ -52,6 +68,19 @@ namespace DetailersApp.WebService
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Utune API V1");
+            });
         }
     }
 }
